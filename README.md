@@ -45,16 +45,49 @@ The `XScreenSaverInfo.Idle` field contains the idle time as `time.Duration`.
 package main
 
 import (
-  "github.com/JelmerDeHen/scrnsaver"
-  "fmt"
+	"github.com/JelmerDeHen/scrnsaver"
+	"fmt"
 )
 
 func main() {
-  info, err := scrnsaver.GetXScreenSaverInfo()
-  if err != nil {
-      panic(err)
-  }
+	info, err := scrnsaver.GetXScreenSaverInfo()
+	if err != nil {
+		panic(err)
+	}
 
-  fmt.Printf("User is idle for %dms\n", info.Idle.Milliseconds())
+	fmt.Printf("User is idle for %dms\n", info.Idle.Milliseconds())
+}
+```
+
+This could be used to perform some action based on idleness
+
+```go
+package main
+
+import (
+        "github.com/JelmerDeHen/scrnsaver"
+        "fmt"
+        "time"
+)
+
+func main() {
+        for {
+                info, err := scrnsaver.GetXScreenSaverInfo()
+                if err != nil {
+                        panic(err)
+                }
+
+                fmt.Printf("User is idle for %dms\n", info.Idle.Milliseconds())
+
+                if info.Idle > time.Second*5 {
+                        fmt.Println("User is idle")
+                }
+
+                if info.Idle < time.Second*5 {
+                        fmt.Println("User is present")
+                }
+
+                time.Sleep(time.Second)
+        }
 }
 ```
