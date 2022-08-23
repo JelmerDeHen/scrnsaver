@@ -1,6 +1,6 @@
 # scrnsaver
 
-This package calls XScreenSaverQueryInfo() (X11/extensions/scrnsaver.h) and provides content of XScreenSaverInfo (`man 3 XScreenSaverInfo`) in a Go struct. This information contains the amount of time the user was idle.
+Calls XScreenSaverQueryInfo() (X11/extensions/scrnsaver.h) and provides XScreenSaverInfo (`man 3 XScreenSaverInfo`).
 
 ```go
 type XID uint64
@@ -39,3 +39,22 @@ type XScreenSaverInfo struct {
 
 The `XScreenSaverInfo.Idle` field contains the idle time as `time.Duration`.
 
+# Usage
+
+```go
+package main
+
+import (
+  "github.com/JelmerDeHen/scrnsaver"
+  "fmt"
+)
+
+func main() {
+  info, err := scrnsaver.GetXScreenSaverInfo()
+  if err != nil {
+      panic(err)
+  }
+
+  fmt.Printf("User is idle for %dms\n", info.Idle.Milliseconds())
+}
+```
