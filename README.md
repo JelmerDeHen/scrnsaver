@@ -59,7 +59,7 @@ func main() {
 }
 ```
 
-This could be used to perform some action based on idleness
+Perform action based on idle time:
 
 ```go
 package main
@@ -91,3 +91,5 @@ func main() {
         }
 }
 ```
+
+Resolution can be obtained using GetResolution().

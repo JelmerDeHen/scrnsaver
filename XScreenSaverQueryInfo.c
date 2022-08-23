@@ -3,6 +3,7 @@
 #include "types.h"
 
 int GetXScreenSaverQueryInfo(struct XScreenSaverInfo_t *info) {
+  int errno;
 
   Display *dpy = XOpenDisplay(NULL);
 
@@ -11,7 +12,7 @@ int GetXScreenSaverQueryInfo(struct XScreenSaverInfo_t *info) {
   }
 
   XScreenSaverInfo *xscreensaverinfo = XScreenSaverAllocInfo();
-  int errno = XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), xscreensaverinfo);
+  errno = XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), xscreensaverinfo);
   if(errno == 0) {
     return 2;
   }
