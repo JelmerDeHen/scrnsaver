@@ -1,7 +1,4 @@
 #include <X11/Xlib.h>
-#include <err.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 int GetDisplayWidth() {
   int width, snum;
